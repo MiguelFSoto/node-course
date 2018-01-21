@@ -4,6 +4,7 @@ const express = require("express");
 const hbs = require("hbs");
 const fs = require("fs");
 
+const port = process.env.PORT || 8000;
 var app = express();
 
 hbs.registerPartials(__dirname + "/views/partials");
@@ -16,7 +17,7 @@ app.use((req, res, next) =>
     console.log(log);
     fs.appendFileSync("server.log", log + "\n");
     next();
-});
+}); 
 
 // app.use((req, res, next) =>
 // {
@@ -71,7 +72,7 @@ app.get("/params/:id", (req, res) =>
     res.send("<h1>ID: " + req.params.id + "</h1>");
 });
 
-app.listen(8000, () =>
+app.listen(port, () =>
 {
-    console.log("Server started on port 8000, go to localhost:8000 to access the server");
+    console.log(`Server started on port ${port}, go to localhost:${port} to access the server`);
 });
